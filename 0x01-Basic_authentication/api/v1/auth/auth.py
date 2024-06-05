@@ -1,6 +1,5 @@
-
 #!/usr/bin/env python3
-""" Module of Auth """
+""" Modules"""
 from typing import TypeVar
 from flask import request
 from models.user import User
@@ -30,4 +29,3 @@ class Auth():
     def current_user(self, request=None) -> TypeVar('User'):
         """ Current user """
         return None
-
