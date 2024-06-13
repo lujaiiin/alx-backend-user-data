@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""
-simple flask app
-"""
+"""modules"""
+
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
@@ -12,13 +11,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    ''' first route'''
+    """FUN"""
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=["POST"])
 def users():
-    ''' second route'''
+    """USER"""
+
     email = request.form.get("email")
     password = request.form.get("password")
     try:
@@ -30,7 +30,8 @@ def users():
 
 @app.route("/sessions", methods=["POST"])
 def login():
-    ''' third route'''
+    """LOGIN"""
+
     email = request.form.get("email")
     password = request.form.get("password")
     user = AUTH.valid_login(email, password)
@@ -43,7 +44,8 @@ def login():
 
 @app.route("/sessions", methods=["DELETE"])
 def logout():
-    ''' fourth route '''
+    """LOGOUT"""
+
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if not user:
@@ -54,7 +56,8 @@ def logout():
 
 @app.route("/profile")
 def profile():
-    ''' fifth route '''
+    """PROFILE"""
+
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if not user:
@@ -64,7 +67,8 @@ def profile():
 
 @app.route("/reset_password", methods=["POST"])
 def get_reset_password_token():
-    ''' sixth route '''
+    """get"""
+
     email = request.form.get("email")
     try:
         reset_token = AUTH.get_reset_password_token(email)
@@ -75,7 +79,8 @@ def get_reset_password_token():
 
 @app.route("/reset_password", methods=["PUT"])
 def update_password():
-    ''' sixth route '''
+    """update"""
+
     email = request.form.get("email")
     reset_token = request.form.get("reset_token")
     new_password = request.form.get("new_password")
